@@ -4,15 +4,12 @@
              x:Class="PetAdoptM.AnimalePage"
              Title="Animale Disponibile">
     <StackLayout Margin="20">
-        <Editor Placeholder="Introduceti descrierea animalului"
-                Text="{Binding Description}"
+        <Editor Placeholder="Introduceti descrierea animalului" Text="{Binding Description}" />
+        <Picker x:Name="LocatiePicker" Title="Alege localitatea:" ItemDisplayBinding="{Binding Localitate}" />
 
-        ItemDisplayBinding="{Binding Localitate}" />
+        
 
-        <Label Text="{Binding Locatie.Localitate, StringFormat='Locatie: {0}'}" />
-       
-        <Editor Placeholder="Detalii"
-        HeightRequest="50" />
+        <Editor Placeholder="Detalii" HeightRequest="50" />
 
         <Grid>
             <Grid.ColumnDefinitions>
@@ -20,13 +17,17 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Button Text="Save" Clicked="OnSaveButtonClicked" />
+            <Button Grid.Column="1" Text="Delete" Clicked="OnDeleteButtonClicked"/>
         </Grid>
         <ListView x:Name="listView" Margin="20">
             <ListView.ItemTemplate>
                 <DataTemplate>
+                    <TextCell Text="{Binding Description}" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
+        <Button Text="Adauga detalii despre tipul de animal" MaximumWidthRequest="300" Clicked="OnAddTipButtonClicked"/>
     </StackLayout>
 </ContentPage>
+

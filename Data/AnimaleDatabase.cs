@@ -30,8 +30,9 @@ namespace PetAdoptM.Data
 
         public Task<int> DeleteTipAsync(Tipuri tip)
         {
+            // Implement the delete logic here
+            return _database.DeleteAsync(tip);
         }
-
 
         public Task<List<Tipuri>> GetTipAsync()
         {
@@ -40,6 +41,7 @@ namespace PetAdoptM.Data
 
         public Task<List<Tipuri>> GetTipAsync(int animalId)
         {
+            // Implement the query logic here
             return _database.QueryAsync<Tipuri>(
                 "SELECT * FROM Animale A " +
                 "INNER JOIN ListTipuri LI ON A.ID = LI.AnimaleID " +
@@ -48,9 +50,12 @@ namespace PetAdoptM.Data
         }
 
         // Animale 
+        public Task<int> SaveAnimaleAsync(Animale animale)
         {
             if (animale.ID != 0)
+                return _database.UpdateAsync(animale);
             else
+                return _database.InsertAsync(animale);
         }
 
         public Task<int> DeleteAnimaleAsync(Animale animale)
@@ -58,14 +63,25 @@ namespace PetAdoptM.Data
             return _database.DeleteAsync(animale);
         }
 
-        public Task<List<Animale>> GetAnimaleAsync(int id)
+        public async Task<List<Animale>> GetAnimaleAsync()
         {
-            return _database.Table<Animale>().ToListAsync();
+            var animaleList = await _database.Table<Animale>().ToListAsync();
+
+            foreach (var animale in animaleList)
+            {
+                
+                animale.Locatie = await GetLocatieAsync(animale.LocatieID);
+
+                
+                Console.WriteLine($"Animale ID: {animale.ID}, Description: {animale.Description}, Locatie: {animale.Locatie?.Localitate}");
+            }
+
+            return animaleList;
         }
 
-        public Task<List<Animale>> GetRecipeAsync()
+        public Task<Animale> GetAnimaleAsync(int animalId)
         {
-            return _database.Table<Animale>().ToListAsync();
+            return _database.Table<Animale>().Where(a => a.ID == animalId).FirstOrDefaultAsync();
         }
 
         // ListTipuri 
@@ -78,9 +94,9 @@ namespace PetAdoptM.Data
         }
 
         public Task<ListTipuri> GetTipDetailsAsync(int tipId)
-{
-    return _database.Table<ListTipuri>().FirstOrDefaultAsync(x => x.TipuriID == tipId);
-}
+        {
+            return _database.Table<ListTipuri>().FirstOrDefaultAsync(x => x.TipuriID == tipId);
+        }
 
         // Locatie 
         public Task<int> SaveLocatieAsync(Locatie locatie)
@@ -107,3 +123,4 @@ namespace PetAdoptM.Data
         }
     }
 }
+

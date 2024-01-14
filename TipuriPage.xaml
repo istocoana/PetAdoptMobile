@@ -23,7 +23,7 @@
                 <Button Grid.Column="1"
  Text="Delete Tip" MaximumWidthRequest="200"
  Clicked="OnDeleteButtonClicked"/>
-                <ListView Grid.Row="1" Grid.Column="0" x:Name="listView"
+                <ListView Grid.Row="1" Grid.Column="0" x:Name="listView">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextCell Text="{Binding Description}" />

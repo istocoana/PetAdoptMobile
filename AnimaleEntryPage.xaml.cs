@@ -1,44 +1,46 @@
 using PetAdoptM.Models;
-namespace PetAdoptM;
+using Microsoft.Maui.Controls;
+using System;
 
-public partial class AnimaleEntryPage : ContentPage
+namespace PetAdoptM
 {
-	public AnimaleEntryPage()
+    public partial class AnimaleEntryPage : ContentPage
     {
-        InitializeComponent();
-    }
-
-    protected override async void OnAppearing()
-    {
-        base.OnAppearing();
-        int animalId = 1; 
-        var animaleList = await App.Database.GetAnimaleAsync(animalId);
-
-       
-        foreach (var animale in animaleList)
+        public AnimaleEntryPage()
         {
-            animale.Locatie = await App.Database.GetLocatieAsync(animale.LocatieID);
+            InitializeComponent();
         }
 
-        listView.ItemsSource = animaleList;
-    }
-
-    async void OnAnimaleAddedClicked(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new AnimalePage
+        protected override async void OnAppearing()
         {
-            BindingContext = new Animale()
-        });
-    }
+            base.OnAppearing();
+            listView.ItemsSource = await App.Database.GetAnimaleAsync();
+        }
 
-    async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
-    {
-        if (e.SelectedItem != null)
+        async void OnAnimaleAddedClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new AnimalePage
             {
-                BindingContext = e.SelectedItem as Animale
+                BindingContext = new Animale()
             });
         }
+
+        async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItem != null)
+            {
+                var selectedAnimale = e.SelectedItem as Animale;
+
+                // Load the location information for the selected animal
+                selectedAnimale.Locatie = await App.Database.GetLocatieAsync(selectedAnimale.LocatieID);
+
+                await Navigation.PushAsync(new AnimalePage
+                {
+                    BindingContext = selectedAnimale
+                });
+            }
+        }
+
     }
 }
+

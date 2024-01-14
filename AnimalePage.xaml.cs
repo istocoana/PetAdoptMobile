@@ -55,21 +55,24 @@ namespace PetAdoptM
         {
             base.OnAppearing();
 
-            
+
             var locations = await App.Database.GetLocatieAsync();
             LocatiePicker.ItemsSource = locations;
             LocatiePicker.ItemDisplayBinding = new Binding("Localitate");
 
-            
+
             var animale = (Animale)BindingContext;
             if (animale.LocatieID != 0)
             {
                 LocatiePicker.SelectedItem = locations.FirstOrDefault(loc => loc.ID == animale.LocatieID);
             }
 
-          
+
             listView.ItemsSource = await App.Database.GetTipAsync(animale.ID);
         }
+
+
+
 
         async void OnAddTipButtonClicked(object sender, EventArgs e)
         {

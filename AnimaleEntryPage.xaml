@@ -10,9 +10,17 @@
             <ListView x:Name="listView" Margin="20" ItemSelected="OnListViewItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="{Binding Description}" FontAttributes="Bold" />
+                                <Label Text="{Binding Locatie.Localitate, StringFormat='Locație: {0}'}" />
+                            </StackLayout>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
