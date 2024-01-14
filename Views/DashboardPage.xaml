@@ -20,6 +20,6 @@
             Text="Welcome to PetAdopt"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-        <Button Text="Log out" BackgroundColor="Black" TextColor="White" Command="{Binding LogoutCommand}"></Button>
+        <Button Text="Logout" BackgroundColor="Black" TextColor="White" Command="{Binding LogoutCommand}"></Button>
     </VerticalStackLayout>
 </ContentPage>

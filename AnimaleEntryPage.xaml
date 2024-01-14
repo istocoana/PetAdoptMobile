@@ -10,7 +10,6 @@
             <ListView x:Name="listView" Margin="20" ItemSelected="OnListViewItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding Description}"   Detail="{Binding Locatie.Localitate}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

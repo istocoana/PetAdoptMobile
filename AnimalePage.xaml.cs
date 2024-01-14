@@ -1,3 +1,4 @@
+using PetAdoptM.Models;
 using Microsoft.Maui.Controls;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace PetAdoptM
         public AnimalePage()
         {
             InitializeComponent();
-            BindingContext = new Animale();
+            BindingContext = new Animale(); 
             LoadLocations();
         }
 

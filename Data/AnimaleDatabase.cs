@@ -28,9 +28,8 @@ namespace PetAdoptM.Data
                 return _database.InsertAsync(tip);
         }
 
-        public Task<int> DeleteTipAsync(int tipId)
+        public Task<int> DeleteTipAsync(Tipuri tip)
         {
-            return _database.DeleteAsync<Tipuri>(tipId);
         }
 
 
@@ -49,22 +48,9 @@ namespace PetAdoptM.Data
         }
 
         // Animale 
-        public async Task<int> SaveAnimaleAsync(Animale animale)
         {
             if (animale.ID != 0)
-            {
-                return await _database.UpdateAsync(animale);
-            }
             else
-            {
-                
-                if (animale.Locatie != null && animale.Locatie.ID == 0)
-                {
-                    await _database.InsertAsync(animale.Locatie);
-                }
-
-                return await _database.InsertAsync(animale);
-            }
         }
 
         public Task<int> DeleteAnimaleAsync(Animale animale)

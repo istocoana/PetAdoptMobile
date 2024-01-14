@@ -26,12 +26,14 @@ namespace PetAdoptM
 
         async void OnSaveButtonClicked(object sender, EventArgs e)
         {
+            
             await App.Database.SaveAnimaleAsync(a);
             listView.ItemsSource = await App.Database.GetTipAsync();
         }
 
         async void OnDeleteButtonClicked(object sender, EventArgs e)
         {
+            
             await App.Database.DeleteAnimaleAsync(a);
             listView.ItemsSource = await App.Database.GetTipAsync();
         }
@@ -49,7 +51,7 @@ namespace PetAdoptM
             if (selectedTipuri != null)
             {
                 var animale = (Animale)BindingContext;
-                animale.TipuriID = selectedTipuri.ID;
+                animale.TipuriID = selectedTipuri.ID; 
 
 
        
@@ -58,6 +60,7 @@ namespace PetAdoptM
                 await Navigation.PopAsync();
             }
         }
+
     }
 }
 

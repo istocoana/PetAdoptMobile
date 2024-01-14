@@ -3,7 +3,7 @@ namespace PetAdoptM;
 
 public partial class AnimaleEntryPage : ContentPage
 {
-    public AnimaleEntryPage()
+	public AnimaleEntryPage()
     {
         InitializeComponent();
     }
@@ -11,7 +11,7 @@ public partial class AnimaleEntryPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        int animalId = 1;
+        int animalId = 1; 
         var animaleList = await App.Database.GetAnimaleAsync(animalId);
 
        
